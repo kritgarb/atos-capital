@@ -135,6 +135,7 @@ const StyledLink = styled.a`
 
 const LogoImage = styled.img`
     width: 173.8px;
+    margin-top: 22px;
 `;
 
 export {

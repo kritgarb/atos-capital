@@ -14,20 +14,23 @@ function Login() {
             <Container>
                 <FormContainer>
                     <Form>
-                        <Title>Olá! 👋</Title>
-                        <Subtitle>Faça login para começar a gerenciar seus produtos.</Subtitle>
+                        <Title>Cadastre-se</Title>
+                        <Subtitle>Preencha os campos para concluir o seu cadastro.</Subtitle>
+                        <Label htmlFor="text">Nome</Label>
+                        <Input type="text" placeholder="Digite seu nome..." />
+
                         <Label htmlFor="email">Email</Label>
-                        <Input type="email" placeholder="Digite seu email" />
+                        <Input type="email" placeholder="seuemail@email.com" />
+
                         <Label htmlFor="password">Senha</Label>
-                        <Input type="password" placeholder="Digite sua senha" />
-                        <Button>Login</Button>
+                        <Input type="password" placeholder="Digite sua senha..." />
+
+                        <Label htmlFor="password">Confirme sua Senha</Label>
+                        <Input type="password" placeholder="Confirme sua senha..." />
+
+                        <Button>Cadastrar</Button>
                     </Form>
                     <FormFooter>
-                        <p>ou <hr size="1"></hr></p>
-                        <p>
-                            Não possui senha?{' '}
-                            <StyledLink href="/register">Cadastre-se!</StyledLink>
-                        </p>
                         <LogoImage src={Logo} alt="" />
                     </FormFooter>
                 </FormContainer>
