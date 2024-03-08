@@ -16,6 +16,7 @@ const SidebarWrapper = styled.div`
   background-color: #fff;
   color: #ffffff;
   padding: 20px;
+  border-right: 1px solid #DCDCDC;
 `;
 
 const MenuButton = styled.div`
@@ -23,7 +24,7 @@ const MenuButton = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 80px;
+  margin-top: 40px;
 `;
 
 const SidebarButton = styled.a`  

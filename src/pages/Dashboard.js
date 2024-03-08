@@ -14,7 +14,6 @@ const Dashboard = () => {
     <div>
       <GlobalStyle />
       <Navbar />
-      <Sidebar />
     </div>
   );
 };

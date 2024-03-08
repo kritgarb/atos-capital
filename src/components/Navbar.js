@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Sidebar from './Sidebar'; 
-import { FaSearch, FaQuestionCircle, FaBell } from 'react-icons/fa';
+import Avatar from '../assets/img/Image.png';
+import { FaSearch, FaQuestionCircle } from 'react-icons/fa';
+import { VscBellDot } from "react-icons/vsc";
 
 const Container = styled.div`
   display: flex;
@@ -16,7 +18,7 @@ const NavbarWrapper = styled.div`
   height: 86.4px;
   padding: 0 20px;
   background-color: #fff; 
-  border-bottom: 1px solid #ccc; 
+  border-bottom: 1px solid #DCDCDC; 
 `;
 
 const SearchBox = styled.div`
@@ -44,27 +46,47 @@ const SearchIcon = styled.div`
     margin-left: -470px;
 `;
 
+const RightNav = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 300px;
+`;
+
 const NavbarIcon = styled.div`
   display: flex;
   flex-directiom: wrap;
   wrap: nowrap;
-  margin-right: 250px;
+  justify-content: center;
+
   cursor: pointer;
+
+  &:hover {
+    color: #89131D;
+  }
 `;
 
 const UserSection = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  width: 150px;
 `;
 
 const UserName = styled.p`
   margin-right: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
 `;
 
 const UserAvatar = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
+
+  &:hover {
+    box-shadow: 0 0 7px #89131D;
+  }
 `;
 
 const MainContent = styled.div`
@@ -83,19 +105,19 @@ const App = () => {
               <FaSearch size={18} />
             </SearchIcon>
           </SearchBox>
-          <div>
+          <RightNav>
             <NavbarIcon>
               <FaQuestionCircle size={20} />
             </NavbarIcon>
             <NavbarIcon>
-              <FaBell size={20} />
+              <VscBellDot size={25} />
             </NavbarIcon>
 
             <UserSection>
-              <UserName>John Doe</UserName>
-              <UserAvatar src="url_to_user_avatar.jpg" alt="User Avatar" />
+            <UserAvatar src={Avatar} alt="User Avatar" />
+              <UserName>Cristina</UserName>
             </UserSection>
-          </div>
+          </RightNav>
         </NavbarWrapper>
       </MainContent>
     </Container>
