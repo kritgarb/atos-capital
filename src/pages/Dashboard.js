@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ProductList from '../components/ProductList';
 import { createGlobalStyle } from 'styled-components';
@@ -23,14 +23,20 @@ const ContentWrapper = styled.div`
 `;
 
 const Dashboard = () => {
+  const [selectedButton, setSelectedButton] = useState(null);
+
+  const handleSidebarClick = (button) => {
+    setSelectedButton(button);
+  };
+
   return (
     <div>
       <GlobalStyle />
       <DashboardWrapper>
-        <Sidebar />
+        <Sidebar onSidebarClick={handleSidebarClick} />
+        {selectedButton === 'Produtos' && <ProductList />}
         <ContentWrapper>
           <Navbar />
-          <ProductList />
         </ContentWrapper>
       </DashboardWrapper>
     </div>

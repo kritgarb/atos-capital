@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Logo from '../assets/img/Frame.png';
 import { FaShoppingBag, FaClipboardList } from 'react-icons/fa';
-import { MdOutlineContacts, MdEmail } from "react-icons/md";
-import { IoDocumentSharp } from "react-icons/io5";
+import { MdOutlineContacts, MdEmail } from 'react-icons/md';
+import { IoDocumentSharp } from 'react-icons/io5';
 import { Helmet } from 'react-helmet';
 
 const SidebarWrapper = styled.div`
@@ -16,7 +16,7 @@ const SidebarWrapper = styled.div`
   background-color: #fff;
   color: #ffffff;
   padding: 20px;
-  border-right: 1px solid #DCDCDC;
+  border-right: 1px solid #dcdcdc;
 `;
 
 const MenuButton = styled.div`
@@ -27,7 +27,7 @@ const MenuButton = styled.div`
   margin-top: 40px;
 `;
 
-const SidebarButton = styled.a`  
+const SidebarButton = styled.a`
   width: 226px;
   height: 52px;
   display: flex;
@@ -40,12 +40,12 @@ const SidebarButton = styled.a`
   border-radius: 12px;
   text-decoration: none;
   cursor: pointer;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
   transition: background-color 0.3s ease-in-out;
   background-color: ${(props) => (props.selected ? '#e9e9e9' : '#ffffff')};
 
   &:hover {
-    background-color: #89131D;
+    background-color: #89131d;
   }
 
   &:hover p {
@@ -61,7 +61,7 @@ const InfButtom = styled.p`
   font-size: 16px;
   text-align: center;
   text-justify: center;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 600;
   color: #202020;
 
@@ -71,10 +71,18 @@ const InfButtom = styled.p`
 `;
 
 const LogoImage = styled.img`
-    width: 124px;
+  width: 124px;
 `;
 
-const Sidebar = () => {
+const buttonConfigurations = [
+  { id: 'Produtos', icon: <FaShoppingBag size={24} />, label: 'Produtos' },
+  { id: 'Contatos', icon: <MdOutlineContacts size={24} />, label: 'Contatos' },
+  { id: 'Relatórios', icon: <FaClipboardList size={24} />, label: 'Relatórios' },
+  { id: 'Avisos', icon: <MdEmail size={24} />, label: 'Avisos' },
+  { id: 'Documentos', icon: <IoDocumentSharp size={24} />, label: 'Documentos' },
+];
+
+const Sidebar = ({ onSidebarClick }) => {
   const [selectedButton, setSelectedButton] = useState(null);
 
   const handleClick = (button) => {
@@ -88,30 +96,17 @@ const Sidebar = () => {
       </Helmet>
       <LogoImage src={Logo} alt="" />
       <MenuButton>
-        <SidebarButton href="#" selected={selectedButton === 'Produtos'} onClick={() => handleClick('Produtos')}>
-          <FaShoppingBag color="#89131D" size={24} style={{ width: '24px', height: '24px' }} />
-          <InfButtom>Produtos</InfButtom>
-        </SidebarButton>
-
-        <SidebarButton href="#" selected={selectedButton === 'Contatos'} onClick={() => handleClick('Contatos')}>
-          <MdOutlineContacts color="#89131D" size={24} style={{ width: '24px', height: '24px' }} />
-          <InfButtom>Contatos</InfButtom>
-        </SidebarButton>
-
-        <SidebarButton href="#" selected={selectedButton === 'Relatórios'} onClick={() => handleClick('Relatórios')}>
-          <FaClipboardList color="#89131D" size={24} style={{ width: '24px', height: '24px' }} />
-          <InfButtom>Relatórios</InfButtom>
-        </SidebarButton>
-
-        <SidebarButton href="#" selected={selectedButton === 'Avisos'} onClick={() => handleClick('Avisos')}>
-          <MdEmail color="#89131D" size={24} style={{ width: '24px', height: '24px' }} />
-          <InfButtom>Avisos</InfButtom>
-        </SidebarButton>
-
-        <SidebarButton href="#" selected={selectedButton === 'Documentos'} onClick={() => handleClick('Documentos')}>
-          <IoDocumentSharp color="#89131D" size={24} style={{ width: '24px', height: '24px' }} />
-          <InfButtom>Documentos</InfButtom>
-        </SidebarButton>
+        {buttonConfigurations.map((button) => (
+          <SidebarButton
+            key={button.id}
+            href="#"
+            selected={selectedButton === button.id}
+            onClick={() => handleClick(button.id)}
+          >
+            {button.icon}
+            <InfButtom>{button.label}</InfButtom>
+          </SidebarButton>
+        ))}
       </MenuButton>
     </SidebarWrapper>
   );
