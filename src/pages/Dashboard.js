@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
 import { createGlobalStyle } from 'styled-components';
+import Navbar from '../components/Navbar';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -12,6 +13,7 @@ const Dashboard = () => {
   return (
     <div>
       <GlobalStyle />
+      <Navbar />
       <Sidebar />
     </div>
   );
