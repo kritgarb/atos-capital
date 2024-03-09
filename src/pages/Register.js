@@ -2,9 +2,9 @@ import React from 'react';
 import ArtImage from '../assets/img/Art.png';
 import Logo from '../assets/img/Frame.png';
 import { Helmet } from 'react-helmet';
-import { GlobalStyle, Container, FormContainer, Form, Title, Subtitle, Label, Input, Button, FormFooter, StyledLink, LogoImage } from '../styles/LoginStyle';
+import { GlobalStyle, Container, FormContainer, Form, Title, Subtitle, Label, Input, Button, FormFooter, LogoImage } from '../styles/LoginStyle';
 
-function Login() {
+function Register() {
     return (
         <>
             <Helmet>
@@ -40,4 +40,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Register;
