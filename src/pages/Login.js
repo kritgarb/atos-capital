@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import ArtImage from '../assets/img/Art.png';
+import Message from '../styles/Message';
 import Logo from '../assets/img/Frame.png';
 import { Helmet } from 'react-helmet';
 import apiService from '../services/apiService'; 
@@ -19,16 +21,19 @@ import {
 } from '../styles/LoginStyle';
 
 function Login() {
-  const history = useHistory(); 
+  const navigate = useNavigate(); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginStatus, setLoginStatus] = useState(null);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    setLoginStatus(null); 
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    setLoginStatus(null); 
   };
 
   const handleLogin = async () => {
@@ -38,10 +43,14 @@ function Login() {
       console.log('Login successful:', result);
 
       localStorage.setItem('authToken', result.access_token);
+      setLoginStatus('success');
 
-      history.push('/produtos');
+      setTimeout(() => {
+        navigate('/Dashboard');
+      }, 1000);
     } catch (error) {
       console.error('Login failed:', error);
+      setLoginStatus('error');
     }
   };
 
@@ -61,12 +70,14 @@ function Login() {
             <Label htmlFor="password">Senha</Label>
             <Input type="password" placeholder="Digite sua senha" value={password} onChange={handlePasswordChange} />
             <Button onClick={handleLogin}>Login</Button>
+            {loginStatus === 'success' && <Message success>Login bem-sucedido!</Message>}
+            {loginStatus === 'error' && <Message error>Ops! Algo deu errado. Confira suas credenciais, por favor.</Message>}
           </Form>
           <FormFooter>
             <p>ou <hr size="1"></hr></p>
             <p>
               Não possui senha?{' '}
-              <StyledLink href="/register">Cadastre-se!</StyledLink>
+              <StyledLink to="/register">Cadastre-se!</StyledLink>
             </p>
             <LogoImage src={Logo} alt="" />
           </FormFooter>

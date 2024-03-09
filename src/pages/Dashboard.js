@@ -5,7 +5,7 @@ import ProductList from '../components/ProductList';
 import { GlobalStyle, DashboardWrapper, ContentWrapper } from '../styles/DashboardStyles';
 
 const Dashboard = () => {
-  const [selectedButton, setSelectedButton] = useState(null);
+  const [ setSelectedButton] = useState(null);
 
 
   const handleSidebarClick = (button) => {

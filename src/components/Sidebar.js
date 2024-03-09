@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from '../assets/img/Frame.png';
-import { FaShoppingBag, FaClipboardList } from 'react-icons/fa';
+import { FaShoppingBag } from 'react-icons/fa';
 // import { MdOutlineContacts, MdEmail } from 'react-icons/md';
 // import { IoDocumentSharp } from 'react-icons/io5';
 import { Helmet } from 'react-helmet';
