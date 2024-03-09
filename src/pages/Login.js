@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ArtImage from '../assets/img/Art.png';
 import Message from '../styles/Message';
 import Logo from '../assets/img/Frame.png';
@@ -16,7 +17,6 @@ import {
   Input,
   Button,
   FormFooter,
-  StyledLink,
   LogoImage,
 } from '../styles/LoginStyle';
 
@@ -77,7 +77,7 @@ function Login() {
             <p>ou <hr size="1"></hr></p>
             <p>
               Não possui senha?{' '}
-              <StyledLink to="/register">Cadastre-se!</StyledLink>
+              <Link to="/register">Cadastre-se!</Link>
             </p>
             <LogoImage src={Logo} alt="" />
           </FormFooter>
@@ -85,6 +85,7 @@ function Login() {
         <img src={ArtImage} alt="" style={{ width: '816px', height: '1070px' }} />
       </Container>
     </>
+    
   );
 }
 
