@@ -1,5 +1,15 @@
 import styled from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import { SearchBox } from '../styles/Navbarstyles';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+`;
 
 const ProductListContainer = styled.div`
   height: 100%;
@@ -264,6 +274,7 @@ const DescriptionOfList = styled.div`
 `;
 
 export {
+  GlobalStyle,
   ProductListContainer,
   HeaderContainer,
   TextContainer,

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000', 
+  baseURL: 'http://localhost:8000',
 });
 
 const apiService = {
@@ -23,6 +23,23 @@ const apiService = {
     }
   },
 
+  fetchProducts: async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Token não encontrado. Faça login para obter um token válido.');
+    }
+
+    try {
+      const response = await api.get('/products', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  },
 };
 
 export default apiService;
