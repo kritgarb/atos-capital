@@ -42,7 +42,7 @@ function Login() {
       const result = await apiService.loginUser(userData);
       console.log('Login successful:', result);
 
-      localStorage.setItem('token', result.token); 
+      localStorage.setItem('token', result.access_token); 
       setLoginStatus('success');
 
       setTimeout(() => {

@@ -181,23 +181,58 @@ const ListOfProducts = styled.div`
     padding: 0;
   }
 
-  li {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  
+`;
 
-    width: 100%;
-    height: 50px;
+const ListItem = styled.li`
 
-    margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: black;
+  width: 100%;
+  height: 50px;
+
+  margin: 10px 0;
+
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: black;
+
+  
+
+`;
+
+const Item = styled.span`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  margin-left: 20px;
+  padding: 0 20px;
+
+  width: 100%;
+  height: 50px;
+
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: black;
+
+  span {
+    flex: 1; 
+    text-align: center; 
+    padding: 0 10px; 
+    border-right: 1px solid #ccc; 
+
+  &:last-child {
+    border-right: none; 
   }
 `;
+
 
 const ActionButtons = styled.div`
   display: flex;
@@ -273,6 +308,7 @@ const DescriptionOfList = styled.div`
   }
 `;
 
+
 export {
   GlobalStyle,
   ProductListContainer,
@@ -288,4 +324,6 @@ export {
   ActionButtons,
   Button1,
   Button2,
+  ListItem,
+  Item,
 };

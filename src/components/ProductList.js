@@ -18,6 +18,8 @@ import {
   ActionButtons,
   Button1,
   Button2,
+  ListItem,
+  Item,
 } from '../styles/ProductListStyles';
 
 const ProductList = () => {
@@ -98,17 +100,20 @@ const ProductList = () => {
 
           {products.map((product) => (
             <ul key={product.id}>
-              <li>
-                {product.name}
-                {product.categories}
-                {product.date}
-                {product.cod}
-                {`R$ ${product.price.toFixed(2)}`}
+              <ListItem>
+                <Item>
+                {product.dsProduto}
+                {product.dsCategoria}
+                {product.dtCadastro}
+                {product.cdProduto}
+                {`R$ ${Number(product.vlProduto).toFixed(2).replace('.', ',')}`}
+                </Item>
+                
                 <ActionButtons>
                   <Button1>Editar</Button1>
                   <Button2>Excluir</Button2>
                 </ActionButtons>
-              </li> 
+              </ListItem> 
             </ul>
           ))}
         </ListOfProducts>
