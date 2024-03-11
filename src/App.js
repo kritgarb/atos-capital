@@ -5,7 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Register from './pages/Register'; 
 
 const isAuthenticated = () => {
-  return localStorage.getItem('authToken') !== null;
+  return localStorage.getItem('token') !== null;
 };
 
 const App = () => {
@@ -13,9 +13,12 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />} />
-        <Route path="/register" element={<Register />} /> 
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route
+          path="/dashboard"
+          element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />}
+        />
+        <Route path="/register" element={<Register />} />
+        <Route index element={<Navigate to="/login" />} />
       </Routes>
     </Router>
   );

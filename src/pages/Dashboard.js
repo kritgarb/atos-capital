@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
-import ProductList from '../components/ProductList';
+import NewProduct from '../components/NewProduct';
+// import ProductList from '../components/ProductList';
 import { GlobalStyle, DashboardWrapper, ContentWrapper } from '../styles/DashboardStyles';
 
 const Dashboard = () => {
@@ -19,8 +20,9 @@ const Dashboard = () => {
       <DashboardWrapper>
         <Sidebar onSidebarClick={handleSidebarClick} />
         <ContentWrapper>
-          <Navbar />         
-            <ProductList />
+          <Navbar /> 
+          <NewProduct />        
+           {/* <ProductList /> */}
         </ContentWrapper>
       </DashboardWrapper>
     </div>

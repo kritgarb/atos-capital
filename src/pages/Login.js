@@ -41,16 +41,14 @@ function Login() {
       const userData = { email, password };
       const result = await apiService.loginUser(userData);
       console.log('Login successful:', result);
-
-      localStorage.setItem('token', result.access_token); 
+  
+      localStorage.setItem('token', result.access_token); // Consider more secure storage
       setLoginStatus('success');
-
-      setTimeout(() => {
-        navigate('/Dashboard');
-      }, 1000);
+      navigate('/Dashboard');
     } catch (error) {
       console.error('Login failed:', error);
       setLoginStatus('error');
+      // Handle error and display specific message to user
     }
   };
 

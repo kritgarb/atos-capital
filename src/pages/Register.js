@@ -53,24 +53,31 @@ function Register() {
         setRegistrationStatus('error');
         return;
       }
-
-      const userData = { name, email, password };
-      const result = await apiService.registerUser(userData);
-      console.log('Registration successful:', result);
-
+  
+      await apiService.registerUser({ name, email, password });
+  
+      // Se o registro for bem-sucedido, automaticamente faça o login
+      const loginData = { email, password };
+      await apiService.login(loginData);
+  
       setName('');
       setEmail('');
       setPassword('');
       setConfirmPassword('');
-
+  
       setRegistrationStatus('success');
-
+  
       setTimeout(() => {
-        navigate('/login'); 
+        navigate('/dashboard'); // Redirecione para a página após o login bem-sucedido
       }, 1000);
     } catch (error) {
       console.error('Registration failed:', error);
-      setRegistrationStatus('error');
+  
+      if (error.message.includes('Incorrect email or password')) {
+        setRegistrationStatus('error-incorrect-credentials');
+      } else {
+        setRegistrationStatus('error-server');
+      }
     }
   };
 
