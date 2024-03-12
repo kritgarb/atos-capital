@@ -5,6 +5,7 @@ import ProductList from '../components/ProductList';
 import NewProduct from '../components/NewProduct';
 import { GlobalStyle, DashboardWrapper, ContentWrapper } from '../styles/DashboardStyles';
 
+
 const Dashboard = () => {
   const [isNewProductOpen, setIsNewProductOpen] = useState(false);
 
