@@ -157,11 +157,10 @@ const ProductList = ({ handleSidebarClick }) => {
         </ListOfProducts>
       </ProductListContainer>
 
-      {/* Modal de Edição */}
+      {/* Modal */}
       {isEditModalOpen && (
         <div className="modal">
           <h2>Editar Produto</h2>
-          {/* Campos de Edição */}
           <label>
             Descrição:
             <input
@@ -178,9 +177,6 @@ const ProductList = ({ handleSidebarClick }) => {
               onChange={(e) => handleInputChange('dsCategoria', e.target.value)}
             />
           </label>
-          {/* Adicione mais campos conforme necessário */}
-
-          {/* Lógica de Atualização */}
           <button onClick={() => handleUpdateProduct(editingProduct.id)}>Salvar Alterações</button>
           <button onClick={handleCloseModal}>Fechar Modal</button>
         </div>

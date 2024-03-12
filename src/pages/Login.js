@@ -42,13 +42,12 @@ function Login() {
       const result = await apiService.loginUser(userData);
       console.log('Login successful:', result);
   
-      localStorage.setItem('token', result.access_token); // Consider more secure storage
+      localStorage.setItem('token', result.access_token); 
       setLoginStatus('success');
       navigate('/Dashboard');
     } catch (error) {
       console.error('Login failed:', error);
       setLoginStatus('error');
-      // Handle error and display specific message to user
     }
   };
 

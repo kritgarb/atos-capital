@@ -56,7 +56,6 @@ function Register() {
   
       await apiService.registerUser({ name, email, password });
   
-      // Se o registro for bem-sucedido, automaticamente faça o login
       const loginData = { email, password };
       await apiService.login(loginData);
   
@@ -68,7 +67,7 @@ function Register() {
       setRegistrationStatus('success');
   
       setTimeout(() => {
-        navigate('/dashboard'); // Redirecione para a página após o login bem-sucedido
+        navigate('/dashboard'); 
       }, 1000);
     } catch (error) {
       console.error('Registration failed:', error);

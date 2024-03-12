@@ -10,7 +10,7 @@ const apiService = {
       const response = await api.post('/auth/register', userData);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+      throw new Error(error.response.data.message || 'Error registering user');
     }
   },
 
@@ -19,14 +19,14 @@ const apiService = {
       const response = await api.post('/auth/login', userData);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+      throw new Error(error.response.data.message || 'Error logging in');
     }
   },
 
   fetchProducts: async () => {
     const token = localStorage.getItem('token');
     if (!token) {
-      throw new Error('Token não encontrado. Faça login para obter um token válido.');
+      throw new Error('Token not found. Please log in to get a valid token.');
     }
 
     try {
@@ -37,7 +37,7 @@ const apiService = {
       });
       return response.data;
     } catch (error) {
-      throw error.response.data;
+      throw new Error(error.response.data.message || 'Error fetching products');
     }
   },
 
@@ -62,7 +62,7 @@ const apiService = {
   deleteProduct: async (productId) => {
     try {
       const token = localStorage.getItem('token');
-      console.log('Token de Autorização:', token);
+      console.log('Authorization Token:', token);
   
       const response = await api.delete(`/products/${productId}`, {
         headers: {
@@ -72,14 +72,14 @@ const apiService = {
   
       return response.data;
     } catch (error) {
-      throw new Error(error.response.data.message || 'Erro ao excluir produto');
+      throw new Error(error.response.data.message || 'Error deleting product');
     }
   },
 
   fetchUser: async () => {
     const token = localStorage.getItem('token');
     if (!token) {
-      throw new Error('Token não encontrado');
+      throw new Error('Token not found');
     }
   
     try {
@@ -95,8 +95,26 @@ const apiService = {
   
       return response.user.name; 
     } catch (error) {
-      console.log('Erro ao buscar o nome do usuário:', error);
-      throw error;
+      console.log('Error fetching user name:', error);
+      throw new Error(error.response.data.message || 'Error fetching user');
+    }
+  },
+
+  registredProduct: async (produtoData) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Access token not provided');
+    }
+
+    try {
+      const response = await api.post('/products', produtoData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message || 'Error creating product');
     }
   },
 };

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 const SidebarWrapper = styled.div`
   width: 250px;
   height: 100vh;

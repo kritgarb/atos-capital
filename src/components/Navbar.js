@@ -19,7 +19,6 @@ import { Container,
 import apiService from '../services/apiService'; 
 
 const NavBar = () => {
-
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
