@@ -1,170 +1,159 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
+import { FormContainer, Title, SubTitle, Label, InputField, ButtonsFormNewProduct, Button, ButtonCancel } from '../styles/NewProductsStyles';
+import apiService from '../services/apiService';
 
-const FormContainer = styled.div`
-  width: 936px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 20px;
-  border: 1px solid #e6f7ff;
-  border-radius: 4px;
-  background-color: #fff;
 
-  font-family: 'poppins', sans-serif;
-`;
-
-const Title = styled.h1`
-  text-align: start;
-  font-size: 20px;
-  font-weight: bold;
-  color: #428bca;
-  margin-bottom: 10px;
-`;
-
-const SubTitle = styled.p`
-  text-align: start;
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 20px;
-`;
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: 5px;
-  font-size: 14px;
-  color: #666;
-`;
-
-const InputField = styled.input`
-  width: 486px;
-  height: 26px;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  margin-bottom: 30px;
-  font-size: 14px;
-  background-color: #F6F7F9;
-  color: #333;
-  &::placeholder {
-    color: #999;
-  }
-`;
-
-const ButtonsFormNewProduct = styled.div`
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 40px;
-`;
-
-const Button = styled.button`
-  width: 200px;
-  padding: 10px;
-  background-color: #89131D;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  &:hover {
-    border: 1px solid #89131D;
-    background-color: #F6F7F9;
-    color: #89131D;
-  }
-`;
-
-const ButtonCancel = styled.button`
-    width: 200px;
-    padding: 10px;
-    background-color: #fff;
-    color: cancelar;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    &:hover {
-     color: #89131D;
-     border: 1px solid #89131D;
-     background-color: #F6F7F9;
-    }
-`;
-
-const NewProduct = () => {
+const NewProduct = ({ handleClose }) => {
   const [descricao, setDescricao] = useState('');
   const [codigo, setCodigo] = useState('');
   const [quantidade, setQuantidade] = useState('');
   const [categoria, setCategoria] = useState('');
   const [valor, setValor] = useState('');
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleFieldChange = (fieldName, value) => {
+    setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: '' }));
+
+    switch (fieldName) {
+      case 'descricao':
+        setDescricao(value);
+        break;
+      case 'codigo':
+        setCodigo(value);
+        break;
+      case 'quantidade':
+        setQuantidade(value);
+        break;
+      case 'categoria':
+        setCategoria(value);
+        break;
+      case 'valor':
+        setValor(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
-    // TODO: Implementar a lógica de envio do formulário
-    // Exibir mensagem de sucesso ou erro
+    try {
+      const newErrors = {};
+      if (!descricao) {
+        newErrors.descricao = 'Descrição é obrigatória';
+      }
+      if (!codigo) {
+        newErrors.codigo = 'Código é obrigatório';
+      }
+      if (!quantidade) {
+        newErrors.quantidade = 'Quantidade é obrigatória';
+      }
+      if (!categoria) {
+        newErrors.categoria = 'Categoria é obrigatória';
+      }
+      if (!valor) {
+        newErrors.valor = 'Valor unitário é obrigatório';
+      }
+
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+      } else {
+        const response = await apiService.cadastrarProduto({ descricao, codigo, quantidade, categoria, valor });
+
+        if (response.ok) {
+          setDescricao('');
+          setCodigo('');
+          setQuantidade('');
+          setCategoria('');
+          setValor('');
+
+          alert('Produto cadastrado com sucesso!');
+
+          handleClose();
+        } else {
+          alert(response.data.message || 'Erro ao cadastrar produto. Tente novamente.');
+        }
+      }
+    } catch (error) {
+      console.error('Erro ao cadastrar produto:', error);
+      alert('Erro ao cadastrar produto. Tente novamente.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <FormContainer>
+    <>
+      <FormContainer>
         <Helmet>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-          rel="stylesheet"
-        />
-      </Helmet>
-      <Title>Informações sobre o Produto</Title>
-      <SubTitle>Favor inserir as informações relativas ao produto que deseja cadastrar.</SubTitle>
-      <form onSubmit={handleSubmit}>
-        <Label htmlFor="descricao">Descrição do Produto:</Label>
+            
+        </Helmet>
+        <Title>Cadastrar Produto</Title>
+        <SubTitle>Preencha os campos abaixo para cadastrar um novo produto</SubTitle>
+
+        <Label htmlFor="descricao">Descrição</Label>
         <InputField
           type="text"
           id="descricao"
-          placeholder="Descrição do Produto"
+          name="descricao"
           value={descricao}
-          onChange={(e) => setDescricao(e.target.value)}
+          onChange={(e) => handleFieldChange('descricao', e.target.value)}
+          placeholder="Descrição do produto"
         />
-        <Label htmlFor="codigo">Código do Produto:</Label>
+        {errors.descricao && <span>{errors.descricao}</span>}
+        <Label htmlFor="codigo">Código</Label>
         <InputField
           type="text"
           id="codigo"
-          placeholder="Código do Produto"
+          name="codigo"
           value={codigo}
-          onChange={(e) => setCodigo(e.target.value)}
+          onChange={(e) => handleFieldChange('codigo', e.target.value)}
+          placeholder="Código do produto"
         />
-        <Label htmlFor="quantidade">Quantidade:</Label>
+        {errors.codigo && <span>{errors.codigo}</span>}
+        <Label htmlFor="quantidade">Quantidade</Label>
         <InputField
           type="number"
           id="quantidade"
-          placeholder="Quantidade"
+          name="quantidade"
           value={quantidade}
-          onChange={(e) => setQuantidade(e.target.value)}
+          onChange={(e) => handleFieldChange('quantidade', e.target.value)}
+          placeholder="Quantidade do produto"
         />
-        <Label htmlFor="categoria">Categoria:</Label>
+        {errors.quantidade && <span>{errors.quantidade}</span>}
+        <Label htmlFor="categoria">Categoria</Label>
         <InputField
           type="text"
           id="categoria"
-          placeholder="Categoria do Produto"
+          name="categoria"
           value={categoria}
-          onChange={(e) => setCategoria(e.target.value)}
+          onChange={(e) => handleFieldChange('categoria', e.target.value)}
+          placeholder="Categoria do produto"
         />
-        <Label htmlFor="valor">Valor unitário:</Label>
+        {errors.categoria && <span>{errors.categoria}</span>}
+        <Label htmlFor="valor">Valor Unitário</Label>
         <InputField
           type="number"
           id="valor"
-          placeholder="Valor unitário"
+          name="valor"
           value={valor}
-          onChange={(e) => setValor(e.target.value)}
+          onChange={(e) => handleFieldChange('valor', e.target.value)}
+          placeholder="Valor unitário do produto"
         />
-      </form>
+        {errors.valor && <span>{errors.valor}</span>}
 
-      <ButtonsFormNewProduct>
-        <Button type="submit">Cadastrar</Button>
-        <ButtonCancel type="">Cancelar</ButtonCancel>
+        <ButtonsFormNewProduct>
+          <Button type="submit" onClick={handleSubmit} disabled={isSubmitting}>
+            Cadastrar
+          </Button>
+          <ButtonCancel onClick={handleClose}>Cancelar</ButtonCancel>
         </ButtonsFormNewProduct>
-    </FormContainer>
+      </FormContainer>
+    </>
   );
 };
 

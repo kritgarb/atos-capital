@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
+import ProductList from '../components/ProductList';
 import NewProduct from '../components/NewProduct';
-// import ProductList from '../components/ProductList';
 import { GlobalStyle, DashboardWrapper, ContentWrapper } from '../styles/DashboardStyles';
 
 const Dashboard = () => {
-  const [ setSelectedButton] = useState(null);
+  const [isNewProductOpen, setIsNewProductOpen] = useState(false);
 
+  const handleOpenNewProduct = () => {
+    setIsNewProductOpen(true);
+  };
+
+  const handleCloseNewProduct = () => {
+    setIsNewProductOpen(false);
+  };
 
   const handleSidebarClick = (button) => {
     console.log('Selected Button:', button);
-    setSelectedButton(button);
+    if (button === 'new-product') {
+      handleOpenNewProduct();
+    }
   };
 
   return (
@@ -20,9 +29,12 @@ const Dashboard = () => {
       <DashboardWrapper>
         <Sidebar onSidebarClick={handleSidebarClick} />
         <ContentWrapper>
-          <Navbar /> 
-          <NewProduct />        
-           {/* <ProductList /> */}
+          <Navbar />
+          {isNewProductOpen ? (
+            <NewProduct handleClose={handleCloseNewProduct} />
+          ) : (
+            <ProductList handleSidebarClick={handleSidebarClick} />
+          )}
         </ContentWrapper>
       </DashboardWrapper>
     </div>

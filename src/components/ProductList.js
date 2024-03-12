@@ -22,7 +22,7 @@ import {
   Item,
 } from '../styles/ProductListStyles';
 
-const ProductList = () => {
+const ProductList = ({ handleSidebarClick }) => {
   const [products, setProducts] = useState([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
@@ -53,7 +53,6 @@ const ProductList = () => {
   const handleDelete = async (productId) => {
     try {
       await apiService.deleteProduct(productId);
-      // Atualize a lista de produtos após a exclusão, se necessário.
       const updatedProducts = products.filter((product) => product.id !== productId);
       setProducts(updatedProducts);
     } catch (error) {
@@ -71,7 +70,6 @@ const ProductList = () => {
   const handleUpdateProduct = async (productId) => {
     try {
       await apiService.editProduct(productId, editingProduct);
-      // Atualize a lista de produtos após a edição, se necessário.
       const updatedProducts = products.map((product) => (product.id === productId ? editingProduct : product));
       setProducts(updatedProducts);
       handleCloseModal();
@@ -79,6 +77,7 @@ const ProductList = () => {
       console.error('Erro ao editar produto:', error);
     }
   };
+
 
   return (
     <>
@@ -98,7 +97,7 @@ const ProductList = () => {
             <h2>Seja bem-vindo!</h2>
           </TextContainer>
 
-          <ButtonNewProduct href="">
+          <ButtonNewProduct onClick={() => handleSidebarClick('new-product')}>
             <IoIosAdd />
             Novo Produto
           </ButtonNewProduct>
