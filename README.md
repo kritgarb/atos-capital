@@ -1,70 +1,95 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ATOS CAPITAL SAP test
 
-## Available Scripts
+PROVA PRÁTICA FRONT-END (REACT) – 2024 
 
-In the project directory, you can run:
 
-### `npm start`
+## Rodando localmente
+#### A fake-api que está localizada no meu repositório difere da faki-api disponibilizada nas referências. Fiz alterações para obter resultados específicos.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Clone o repositório:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+  git clone git@github.com:kritgarb/atos-capital.git
 
-### `npm test`
+```
+Entre na raiz do projeto:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+  cd atos-capital
+```
 
-### `npm run build`
+Instale as Dependências:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+  npm install 
+  
+```
+Rode a Aplicação:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+   npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### PARA RODAR A FAKE API
 
-### `npm run eject`
+Entre na raiz da fake-api:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+  cd fake-api-jwt-json-server
+```
+Instale as Dependências e rode a API:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+  npm install 
+  npm run start-auth
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Stack utilizada
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Front-end:** React
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Documentação de cores
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+| Cor               | Hexadecimal                                                |
+| ----------------- | ---------------------------------------------------------------- |
+| White       | ![#FFFFFF](https://via.placeholder.com/10/FFFFFF?text=+) #FFFFFF |
+| Grey       | ![#8897AD](https://via.placeholder.com/10/8897AD?text=+) #8897AD |
+| Red       | ![#89131D](https://via.placeholder.com/10/89131D?text=+) #89131D |
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Contribuindo
 
-### Making a Progressive Web App
+Contribuições são sempre bem-vindas!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Funcionalidades
 
-### Deployment
+- Login
+- Registro
+- Visualizar os Produtos no Dahsboard
+- Editar Produtos
+- Excluir Produtos
+- Adicionar Produtos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+## Licença
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+## Referência
+
+ - [Protótipo Figma](https://www.figma.com/file/8X5joK14F9DLE3NBzHOzS1/Prot%C3%B3tipos-Entrevista-Front-End?type=design&node-id=0%3A1&mode=design&t=pEBLT63AdYCCiQhG-1)
+ - [Fake Api Repo](https://github.com/techiediaries/fake-api-jwt-json-server )
+
+
+
+## Autores
+
+- [@kritgarb](https://www.github.com/kritgarb)
+
