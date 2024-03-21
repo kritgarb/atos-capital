@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ArtImage from '../assets/img/Art.png';
-import Message from '../styles/Message';
-import Logo from '../assets/img/Frame.png';
+import ArtImage from '../../assets/img/Art.png';
+import Message from '../../styles/Message';
+import Logo from '../../assets/img/Frame.png';
 import { Helmet } from 'react-helmet';
-import apiService from '../services/apiService';
+import apiService from '../../services/apiService';
 import {
   GlobalStyle,
   Container,
@@ -17,7 +17,7 @@ import {
   Button,
   FormFooter,
   LogoImage,
-} from '../styles/LoginStyle';
+} from '../Login/LoginStyle';
 
 function Register() {
   const navigate = useNavigate();
@@ -67,7 +67,7 @@ function Register() {
       setRegistrationStatus('success');
   
       setTimeout(() => {
-        navigate('/dashboard'); 
+        navigate('/Login'); 
       }, 1000);
     } catch (error) {
       console.error('Registration failed:', error);

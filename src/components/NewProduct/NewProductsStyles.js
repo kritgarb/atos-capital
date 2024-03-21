@@ -19,7 +19,7 @@ const Title = styled.h1`
   text-align: start;
   font-size: 20px;
   font-weight: bold;
-  color: #428bca;
+  color: #89131D;
   margin-bottom: 10px;
 `;
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
-import { SearchBox } from '../styles/Navbarstyles';
+import { SearchBox } from '../NavBar/Navbarstyles';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -170,7 +170,8 @@ const ListItem = styled.li`
   align-items: center;
   width: 100%;
   height: 50px;
-  margin: 10px 0;
+  margin: 10px 0; 
+  padding: 0 20px; 
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -182,8 +183,7 @@ const Item = styled.span`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-left: 20px;
-  padding: 0 20px;
+  padding: 0 10px;
   width: 100%;
   height: 50px;
   font-family: 'Poppins', sans-serif;
@@ -191,16 +191,6 @@ const Item = styled.span`
   font-weight: 500;
   color: black;
 
-  span {
-    flex: 1; 
-    text-align: center; 
-    padding: 0 10px; 
-    border-right: 1px solid #ccc; 
-
-    &:last-child {
-      border-right: none; 
-    }
-  }
 `;
 
 const ActionButtons = styled.div`

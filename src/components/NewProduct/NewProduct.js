@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import apiService from '../services/apiService';
+import apiService from '../../services/apiService';
 import {
   FormContainer,
   Title,
@@ -10,7 +10,7 @@ import {
   ButtonsFormNewProduct,
   Button,
   ButtonCancel,
-} from '../styles/NewProductsStyles';
+} from './NewProductsStyles';
 
 const NewProduct = ({ handleClose }) => {
   const [descricao, setDescricao] = useState('');
@@ -51,19 +51,19 @@ const NewProduct = ({ handleClose }) => {
     try {
       const newErrors = {};
       if (!descricao) {
-        newErrors.descricao = 'Description is required';
+        newErrors.descricao = 'Descrição é obrigatória';
       }
       if (!codigo) {
-        newErrors.codigo = 'Code is required';
+        newErrors.codigo = 'Código é obrigatório';
       }
       if (!quantidade) {
-        newErrors.quantidade = 'Quantity is required';
+        newErrors.quantidade = 'Quantidade é obrigatória';
       }
       if (!categoria) {
-        newErrors.categoria = 'Category is required';
+        newErrors.categoria = 'Categoria é obrigatória';
       }
       if (!valor) {
-        newErrors.valor = 'Unit price is required';
+        newErrors.valor = 'Valor é obrigatório';
       }
   
       if (Object.keys(newErrors).length > 0) {
@@ -86,17 +86,17 @@ const NewProduct = ({ handleClose }) => {
           setCategoria('');
           setValor('');
   
-          alert('Product created successfully!');
+          alert('Produto Cadastrado com Sucesso!');
   
           handleClose(); 
     
         } else {
-          alert(response.data.message || 'Error creating product. Please try again.');
+          alert(response.data.message || 'Erro ao cadastrar produto. Tente novamente.');
         }
       }
     } catch (error) {
-      console.error('Error creating product:', error);
-      alert('Error creating product. Please try again.');
+      console.error('Erro ao criar Produto:', error);
+      alert('Erro ao criar Produto. Tente novamente.');
     } finally {
       setIsSubmitting(false);
     }
@@ -114,57 +114,57 @@ const NewProduct = ({ handleClose }) => {
             rel="stylesheet"
           />
         </Helmet>
-        <Title>Create Product</Title>
-        <SubTitle>Fill in the fields below to create a new product</SubTitle>
+        <Title>Cadastro de Produto</Title>
+        <SubTitle>Favor inserir as informações relativas ao produto que deseja cadastrar.</SubTitle>
 
-        <Label htmlFor="descricao">Description</Label>
+        <Label htmlFor="descricao">Descrição</Label>
         <InputField
           type="text"
           id="descricao"
           name="descricao"
           value={descricao}
           onChange={(e) => handleFieldChange('descricao', e.target.value)}
-          placeholder="Product description"
+          placeholder="Descição do Produto"
         />
         {errors.descricao && <span>{errors.descricao}</span>}
-        <Label htmlFor="codigo">Code</Label>
+        <Label htmlFor="codigo">Código</Label>
         <InputField
           type="text"
           id="codigo"
           name="codigo"
           value={codigo}
           onChange={(e) => handleFieldChange('codigo', e.target.value)}
-          placeholder="Product code"
+          placeholder="Código do Produto"
         />
         {errors.codigo && <span>{errors.codigo}</span>}
-        <Label htmlFor="quantidade">Quantity</Label>
+        <Label htmlFor="quantidade">Quantidade</Label>
         <InputField
           type="number"
           id="quantidade"
           name="quantidade"
           value={quantidade}
           onChange={(e) => handleFieldChange('quantidade', e.target.value)}
-          placeholder="Product quantity"
+          placeholder="Quantidade do Produto"
         />
         {errors.quantidade && <span>{errors.quantidade}</span>}
-        <Label htmlFor="categoria">Category</Label>
+        <Label htmlFor="categoria">Categoria</Label>
         <InputField
           type="text"
           id="categoria"
           name="categoria"
           value={categoria}
           onChange={(e) => handleFieldChange('categoria', e.target.value)}
-          placeholder="Product category"
+          placeholder="Categoria do Produto"
         />
         {errors.categoria && <span>{errors.categoria}</span>}
-        <Label htmlFor="valor">Unit Price</Label>
+        <Label htmlFor="valor">Valor</Label>
         <InputField
           type="number"
           id="valor"
           name="valor"
           value={valor}
           onChange={(e) => handleFieldChange('valor', e.target.value)}
-          placeholder="Product unit price"
+          placeholder="Valor do Produto"
         />
         {errors.valor && <span>{errors.valor}</span>}
         <ButtonsFormNewProduct>

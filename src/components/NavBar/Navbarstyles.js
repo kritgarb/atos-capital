@@ -74,6 +74,10 @@ const UserSection = styled.div`
   align-items: center;
   justify-content: space-around;
   width: 150px;
+  
+  :Link {
+    text-decoration: none;
+  }
 `;
 
 const UserName = styled.p`

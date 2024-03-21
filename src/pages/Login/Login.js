@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import ArtImage from '../assets/img/Art.png';
-import Message from '../styles/Message';
-import Logo from '../assets/img/Frame.png';
+import ArtImage from '../../assets/img/Art.png';
+import Message from '../../styles/Message';
+import Logo from '../../assets/img/Frame.png';
 import { Helmet } from 'react-helmet';
-import apiService from '../services/apiService'; 
+import apiService from '../../services/apiService'; 
 import {
   GlobalStyle,
   Container,
@@ -18,10 +18,10 @@ import {
   Button,
   FormFooter,
   LogoImage,
-} from '../styles/LoginStyle';
+} from './LoginStyle';
 
 function Login() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginStatus, setLoginStatus] = useState(null);
@@ -40,13 +40,13 @@ function Login() {
     try {
       const userData = { email, password };
       const result = await apiService.loginUser(userData);
-      console.log('Login successful:', result);
-  
-      localStorage.setItem('token', result.access_token); 
-      setLoginStatus('success');
+      console.log('Login bem-sucedido:', result);
+
+      localStorage.setItem('token', result.access_token);
+      setLoginStatus('success'); 
       navigate('/Dashboard');
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error('Login falhou:', error);
       setLoginStatus('error');
     }
   };
@@ -59,17 +59,20 @@ function Login() {
       <GlobalStyle />
       <Container>
         <FormContainer>
-          <Form>
-            <Title>Olá! 👋</Title>
-            <Subtitle>Faça login para começar a gerenciar seus produtos.</Subtitle>
-            <Label htmlFor="email">Email</Label>
-            <Input type="email" placeholder="Digite seu email" value={email} onChange={handleEmailChange} />
-            <Label htmlFor="password">Senha</Label>
-            <Input type="password" placeholder="Digite sua senha" value={password} onChange={handlePasswordChange} />
-            <Button onClick={handleLogin}>Login</Button>
-            {loginStatus === 'success' && <Message success>Login bem-sucedido!</Message>}
-            {loginStatus === 'error' && <Message error>Ops! Algo deu errado. Confira suas credenciais, por favor.</Message>}
-          </Form>
+          {loginStatus === 'success' ? ( 
+            <Message success>Login bem-sucedido!</Message>
+          ) : (
+            <Form>
+              <Title>Olá! </Title>
+              <Subtitle>Faça login para começar a gerenciar seus produtos.</Subtitle>
+              <Label htmlFor="email">Email</Label>
+              <Input type="email" placeholder="Digite seu email" value={email} onChange={handleEmailChange} />
+              <Label htmlFor="password">Senha</Label>
+              <Input type="password" placeholder="Digite sua senha" value={password} onChange={handlePasswordChange} />
+              <Button onClick={handleLogin}>Login</Button>
+              {loginStatus === 'error' && <Message error>Ops! Algo deu errado. Confira suas credenciais, por favor.</Message>}
+            </Form>
+          )}
           <FormFooter>
             <p>ou <hr size="1"></hr></p>
             <p>
@@ -82,7 +85,6 @@ function Login() {
         <img src={ArtImage} alt="" style={{ width: '816px', height: '1070px' }} />
       </Container>
     </>
-    
   );
 }
 

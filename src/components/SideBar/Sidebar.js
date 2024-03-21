@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Logo from '../assets/img/Frame.png';
+import Logo from '../../assets/img/Frame.png';
 import { FaShoppingBag } from 'react-icons/fa';
 // import { MdOutlineContacts, MdEmail } from 'react-icons/md';
 // import { IoDocumentSharp } from 'react-icons/io5';
 import { Helmet } from 'react-helmet';
-import { SidebarWrapper, MenuButton, SidebarButton, InfButtom, LogoImage } from '../styles/SideBarStyles';
+import { SidebarWrapper, MenuButton, SidebarButton, InfButtom, LogoImage } from './SideBarStyles';
 
 const buttonConfigurations = [
   { id: 'Produtos', icon: <FaShoppingBag size={24} />, label: 'Produtos' },

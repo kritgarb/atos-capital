@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Navbar from '../components/Navbar';
-import Sidebar from '../components/Sidebar';
-import ProductList from '../components/ProductList';
-import NewProduct from '../components/NewProduct';
-import { GlobalStyle, DashboardWrapper, ContentWrapper } from '../styles/DashboardStyles';
+import Navbar from '../../components/NavBar/Navbar';
+import Sidebar from '../../components/SideBar/Sidebar';
+import ProductList from '../../components/ProductList/ProductList';
+import NewProduct from '../../components/NewProduct/NewProduct';
+import { GlobalStyle, DashboardWrapper, ContentWrapper } from './DashboardStyles';
 
 
 const Dashboard = () => {

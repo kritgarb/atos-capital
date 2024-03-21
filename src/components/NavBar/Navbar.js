@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Avatar from '../assets/img/Image.png';
+import Avatar from '../../assets/img/Image.png';
 import { FaSearch, FaQuestionCircle } from 'react-icons/fa';
 import { VscBellDot } from "react-icons/vsc";
 import { Helmet } from 'react-helmet';
@@ -15,8 +15,8 @@ import { Container,
   UserSection,
   UserName,
   UserAvatar,
-  MainContent } from '../styles/Navbarstyles';
-import apiService from '../services/apiService'; 
+  MainContent } from './Navbarstyles';
+import apiService from '../../services/apiService'; 
 
 const NavBar = () => {
   const [userName, setUserName] = useState('');

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { IoIosAdd } from 'react-icons/io';
 import { Helmet } from 'react-helmet';
 import { FaSearch } from 'react-icons/fa';
-import apiService from '../services/apiService';
+import apiService from '../../services/apiService';
+import EditModal from '../Modal/Modal';
 import {
   GlobalStyle,
   ProductListContainer,
@@ -20,7 +21,7 @@ import {
   Button2,
   ListItem,
   Item,
-} from '../styles/ProductListStyles';
+} from './ProductListStyles';
 
 const ProductList = ({ handleSidebarClick }) => {
   const [products, setProducts] = useState([]);
@@ -128,59 +129,57 @@ const ProductList = ({ handleSidebarClick }) => {
         <br />
 
         <ListOfProducts>
-          <DescriptionOfList>
-            <span>Descrição</span>
-            <span>Categoria</span>
-            <span>Data Cadastro</span>
-            <span>Cód.Produto</span>
-            <span>Preço</span>
-            <span>Ações</span>
-          </DescriptionOfList>
+  <DescriptionOfList>
+    <span>Descrição</span>
+    <span>Categoria</span>
+    <span>Data Cadastro</span>
+    <span>Cód.Produto</span>
+    <span>Preço</span>
+    <span>Ações</span>
+  </DescriptionOfList>
 
-          {products.map((product) => (
-            <ul key={product.id}>
-              <ListItem>
-                <Item>
-                  {product.dsProduto}
-                  {product.dsCategoria}
-                  {product.dtCadastro}
-                  {product.cdProduto}
-                  {`R$ ${Number(product.vlProduto).toFixed(2).replace('.', ',')}`}
-                </Item>
-                <ActionButtons>
-                  <Button1 onClick={() => handleEditClick(product)}>Editar</Button1>
-                  <Button2 onClick={() => handleDelete(product.id)}>Excluir</Button2>
-                </ActionButtons>
-              </ListItem>
-            </ul>
-          ))}
-        </ListOfProducts>
+  <ul>
+    {products.map((product) => {
+      const date = new Date(product.dtCadastro);
+      const monthNames = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+      const formattedDate = `${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+
+      return (
+        <ListItem key={product.id}>
+          <Item>
+            {product.dsProduto}
+          </Item>
+          <Item>
+            {product.dsCategoria}
+          </Item>
+          <Item>
+            {formattedDate}
+          </Item>
+          <Item>
+            {product.cdProduto}
+          </Item>
+          <Item>
+            {`R$ ${Number(product.vlProduto).toFixed(2).replace('.', ',')}`}
+          </Item>
+          <ActionButtons>
+            <Button1 onClick={() => handleEditClick(product)}>Editar</Button1>
+            <Button2 onClick={() => handleDelete(product.id)}>Excluir</Button2>
+          </ActionButtons>
+        </ListItem>
+      );
+    })}
+  </ul>
+</ListOfProducts>
+
       </ProductListContainer>
-
-      {/* Modal */}
-      {isEditModalOpen && (
-        <div className="modal">
-          <h2>Editar Produto</h2>
-          <label>
-            Descrição:
-            <input
-              type="text"
-              value={editingProduct.dsProduto}
-              onChange={(e) => handleInputChange('dsProduto', e.target.value)}
-            />
-          </label>
-          <label>
-            Categoria:
-            <input
-              type="text"
-              value={editingProduct.dsCategoria}
-              onChange={(e) => handleInputChange('dsCategoria', e.target.value)}
-            />
-          </label>
-          <button onClick={() => handleUpdateProduct(editingProduct.id)}>Salvar Alterações</button>
-          <button onClick={handleCloseModal}>Fechar Modal</button>
-        </div>
-      )}
+      <EditModal
+        isEditModalOpen={isEditModalOpen}
+        editingProduct={editingProduct}
+        handleInputChange={handleInputChange}
+        handleUpdateProduct={handleUpdateProduct}
+        handleCloseModal={handleCloseModal}
+      />
+      
     </>
   );
 };
