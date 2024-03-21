@@ -179,7 +179,7 @@ const ProductList = ({ handleSidebarClick }) => {
                   <Item>{product.dsCategoria}</Item>
                   <Item>{formattedDate}</Item>
                   <Item>{product.id}</Item>
-                  <Item>{`R$ ${Number(product.vlProduto).toFixed(2).replace('.', ',')}`}</Item>
+                  <Item>{product.vlPreco}</Item>
                   <ActionButtons>
                     <Button1 onClick={() => handleEditClick(product)}>Editar</Button1>
                     <Button2 onClick={() => handleDelete(product.id)}>Excluir</Button2>
