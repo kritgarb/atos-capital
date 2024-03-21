@@ -5,7 +5,6 @@ PROVA PRÁTICA FRONT-END (REACT) – 2024
 
 
 ## Rodando localmente
-#### A fake-api que está localizada no meu repositório difere da faki-api disponibilizada nas referências. Fiz alterações para obter resultados específicos.
 
 Clone o repositório:
 
