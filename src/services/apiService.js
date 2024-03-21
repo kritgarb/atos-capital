@@ -17,11 +17,11 @@ const apiService = {
   loginUser: async (userData) => {
     try {
       const response = await api.post('/auth/login', userData);
-      return response.data;
+      return response
     } catch (error) {
-      throw new Error(error.response.data.message || 'Error logging in');
-    }
-  },
+      console.log(error.message)
+    }
+  },
 
   fetchProducts: async () => {
     const token = localStorage.getItem('token');
@@ -76,7 +76,7 @@ const apiService = {
     }
   },
 
-  fetchUser: async () => {
+  fetchUserData: async () => {
     const token = localStorage.getItem('token');
     if (!token) {
       throw new Error('Token not found');
@@ -89,13 +89,9 @@ const apiService = {
         },
       });
   
-      if (!response.success) {
-        throw new Error(response.message);
-      }
-  
-      return response.user.name; 
+      return response.data; 
     } catch (error) {
-      console.log('Error fetching user name:', error);
+      console.log('Error fetching user:', error);
       throw new Error(error.response.data.message || 'Error fetching user');
     }
   },

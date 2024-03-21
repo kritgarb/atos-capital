@@ -25,6 +25,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginStatus, setLoginStatus] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -38,16 +39,19 @@ function Login() {
 
   const handleLogin = async () => {
     try {
+      setLoading(true);
       const userData = { email, password };
       const result = await apiService.loginUser(userData);
-      console.log('Login bem-sucedido:', result);
-
-      localStorage.setItem('token', result.access_token);
+      console.log('Resposta do servidor após login:', result); 
+  
+      localStorage.setItem('token', result.data.access_token); 
       setLoginStatus('success'); 
+      setLoading(false);
       navigate('/Dashboard');
     } catch (error) {
       console.error('Login falhou:', error);
       setLoginStatus('error');
+      setLoading(false);
     }
   };
 
@@ -69,7 +73,7 @@ function Login() {
               <Input type="email" placeholder="Digite seu email" value={email} onChange={handleEmailChange} />
               <Label htmlFor="password">Senha</Label>
               <Input type="password" placeholder="Digite sua senha" value={password} onChange={handlePasswordChange} />
-              <Button onClick={handleLogin}>Login</Button>
+              <Button disabled={loading} onClick={handleLogin}>{loading ? 'Carregando...' : 'Login'}</Button>
               {loginStatus === 'error' && <Message error>Ops! Algo deu errado. Confira suas credenciais, por favor.</Message>}
             </Form>
           )}

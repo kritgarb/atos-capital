@@ -48,37 +48,28 @@ function Register() {
   };
 
   const handleRegister = async () => {
-    try {
-      if (password !== confirmPassword) {
-        setRegistrationStatus('error');
-        return;
-      }
+
+    if (password !== confirmPassword) {
+      setRegistrationStatus('error');
+    }
+      
+    else {
+      await apiService.registerUser({ email, password, name });
   
-      await apiService.registerUser({ name, email, password });
-  
-      const loginData = { email, password };
-      await apiService.login(loginData);
-  
+      const loginData = { email, password, name };
+      await apiService.loginUser(loginData);
+      
       setName('');
       setEmail('');
       setPassword('');
       setConfirmPassword('');
-  
+    
       setRegistrationStatus('success');
-  
-      setTimeout(() => {
+      
         navigate('/Login'); 
-      }, 1000);
-    } catch (error) {
-      console.error('Registration failed:', error);
-  
-      if (error.message.includes('Incorrect email or password')) {
-        setRegistrationStatus('error-incorrect-credentials');
-      } else {
-        setRegistrationStatus('error-server');
-      }
-    }
-  };
+     
+    }
+  }
 
   return (
     <>
@@ -108,7 +99,7 @@ function Register() {
               onChange={handleConfirmPasswordChange}
             />
 
-            <Button onClick={handleRegister}>Cadastrar</Button>
+            <Button onClick={() => handleRegister()}>Cadastrar</Button>
             {registrationStatus === 'success' && (
               <Message success>Registro bem-sucedido! Você pode fazer login agora.</Message>
             )}

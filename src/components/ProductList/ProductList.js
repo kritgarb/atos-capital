@@ -27,23 +27,7 @@ const ProductList = ({ handleSidebarClick }) => {
   const [products, setProducts] = useState([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
-  const [userName, setUserName] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const userData = await apiService.fetchUserData();
-        if (userData && userData.users && userData.users.length > 0) {
-          setUserName(userData.users[0].name);
-        }
-      } catch (error) {
-        console.error('Erro ao buscar nome do usuário:', error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -95,13 +79,6 @@ const ProductList = ({ handleSidebarClick }) => {
     }
   };
 
-  const handleSearchInputChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const filteredProducts = products.filter((product) => {
-    return product.dsProduto.toLowerCase().includes(searchQuery.toLowerCase());
-  });
 
   return (
     <>
@@ -117,14 +94,8 @@ const ProductList = ({ handleSidebarClick }) => {
       <ProductListContainer>
         <HeaderContainer>
           <TextContainer>
-            {userName ? (
-              <>
-                <h1>Olá {userName}!</h1>
-                <h2>Seja bem-vindo!</h2>
-              </>
-            ) : (
-              <h1>Olá Usuário!</h1>
-            )}
+            <h1>Olá Usuário!</h1>
+            <h2>Seja bem-vindo!</h2>
           </TextContainer>
 
           <ButtonNewProduct onClick={() => handleSidebarClick('new-product')}>
@@ -143,12 +114,12 @@ const ProductList = ({ handleSidebarClick }) => {
         <RegistredProducts>
           <h2>Seus Cadastros</h2>
           <h3>
-            <h2>{filteredProducts.length}</h2>Total de Cadastros
+            <h2>{products.length}</h2>Total de Cadastros
           </h3>
         </RegistredProducts>
         <SearchProducts>
           <div>
-            <SearchInput type="text" placeholder="Procurar..." value={searchQuery} onChange={handleSearchInputChange} />
+            <SearchInput type="text" placeholder="Procurar..." />
             <SearchIcon>
               <FaSearch size={18} />
             </SearchIcon>
@@ -158,39 +129,49 @@ const ProductList = ({ handleSidebarClick }) => {
         <br />
 
         <ListOfProducts>
-          <DescriptionOfList>
-            <span>Descrição</span>
-            <span>Categoria</span>
-            <span>Data Cadastro</span>
-            <span>Cód.Produto</span>
-            <span>Preço</span>
-            <span>Ações</span>
-          </DescriptionOfList>
+  <DescriptionOfList>
+    <span>Descrição</span>
+    <span>Categoria</span>
+    <span>Data Cadastro</span>
+    <span>Cód.Produto</span>
+    <span>Preço</span>
+    <span>Ações</span>
+  </DescriptionOfList>
 
-          <ul>
-            {filteredProducts.map((product) => {
-              const date = new Date(product.dtCadastro);
-              const monthNames = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
-              const formattedDate = `${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+  <ul>
+    {products.map((product) => {
+      const date = new Date(product.dtCadastro);
+      const monthNames = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+      const formattedDate = `${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 
-              return (
-                <ListItem key={product.id}>
-                  <Item>{product.dsProduto}</Item>
-                  <Item>{product.dsCategoria}</Item>
-                  <Item>{formattedDate}</Item>
-                  <Item>{product.id}</Item>
-                  <Item>{`R$ ${Number(product.vlProduto).toFixed(2).replace('.', ',')}`}</Item>
-                  <ActionButtons>
-                    <Button1 onClick={() => handleEditClick(product)}>Editar</Button1>
-                    <Button2 onClick={() => handleDelete(product.id)}>Excluir</Button2>
-                  </ActionButtons>
-                </ListItem>
-              );
-            })}
-          </ul>
-        </ListOfProducts>
+      return (
+        <ListItem key={product.id}>
+          <Item>
+            {product.dsProduto}
+          </Item>
+          <Item>
+            {product.dsCategoria}
+          </Item>
+          <Item>
+            {formattedDate}
+          </Item>
+          <Item>
+            {product.cdProduto}
+          </Item>
+          <Item>
+            {`R$ ${Number(product.vlProduto).toFixed(2).replace('.', ',')}`}
+          </Item>
+          <ActionButtons>
+            <Button1 onClick={() => handleEditClick(product)}>Editar</Button1>
+            <Button2 onClick={() => handleDelete(product.id)}>Excluir</Button2>
+          </ActionButtons>
+        </ListItem>
+      );
+    })}
+  </ul>
+</ListOfProducts>
+
       </ProductListContainer>
-            
       <EditModal
         isEditModalOpen={isEditModalOpen}
         editingProduct={editingProduct}
@@ -198,6 +179,7 @@ const ProductList = ({ handleSidebarClick }) => {
         handleUpdateProduct={handleUpdateProduct}
         handleCloseModal={handleCloseModal}
       />
+      
     </>
   );
 };

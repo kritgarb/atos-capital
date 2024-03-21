@@ -70,16 +70,17 @@ const NewProduct = ({ handleClose }) => {
         setErrors(newErrors);
       } else {
         const produtoData = {
-          dsProduto: descricao,
-          dsCategoria: categoria,
-          cdProduto: codigo,
-          vlProduto: parseFloat(valor.replace(',', '.')), 
-          qtdProduto: parseInt(quantidade), 
+          descricao,
+          categoria,
+          codigo,
+          valor: parseFloat(valor.replace(',', '.')), 
+          quantidade: parseInt(quantidade), 
+          data: new Date().toLocaleDateString(), // Adicionando a data de hoje
         };
   
         const response = await apiService.registredProduct(produtoData);
   
-        if (response.ok) {
+        if (response) {
           setDescricao('');
           setCodigo('');
           setQuantidade('');
@@ -91,7 +92,7 @@ const NewProduct = ({ handleClose }) => {
           handleClose(); 
     
         } else {
-          alert(response.data.message || 'Erro ao cadastrar produto. Tente novamente.');
+          alert('Erro ao cadastrar produto. Tente novamente.');
         }
       }
     } catch (error) {
