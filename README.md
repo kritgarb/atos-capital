@@ -31,22 +31,6 @@ Rode a Aplicação:
    npm start
 ```
 
-### PARA RODAR A FAKE API
-
-Entre na raiz da fake-api:
-
-```bash
-  cd fake-api-jwt-json-server
-```
-Instale as Dependências e rode a API:
-
-```bash
-  npm install 
-  npm run start-auth
-```
-
-
-
 ## Stack utilizada
 
 **Front-end:** React
@@ -75,6 +59,7 @@ Contribuições são sempre bem-vindas!
 - Editar Produtos
 - Excluir Produtos
 - Adicionar Produtos
+- Pesquisar Produtos
 
 
 ## Licença
@@ -85,7 +70,7 @@ Contribuições são sempre bem-vindas!
 ## Referência
 
  - [Protótipo Figma](https://www.figma.com/file/8X5joK14F9DLE3NBzHOzS1/Prot%C3%B3tipos-Entrevista-Front-End?type=design&node-id=0%3A1&mode=design&t=pEBLT63AdYCCiQhG-1)
- - [Fake Api Repo](https://github.com/techiediaries/fake-api-jwt-json-server )
+ - [Fake Api Repo](https://github.com/kritgarb/atos-capital-fake-api)
 
 
 
